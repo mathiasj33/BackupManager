@@ -1,0 +1,5 @@
+.list-view {
+    -fx-background-color: lightgray;
+    -fx-background-insets: 0;
+    -fx-padding: 1;
+}
