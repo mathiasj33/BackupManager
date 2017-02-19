@@ -19,6 +19,10 @@ public class Backup {
         backupInfos.add(info);
     }
     
+    public void removeBackupInfo(BackupInfo info) {
+        backupInfos.remove(info);
+    }
+    
     public ObservableList<BackupInfo> getBackupInfos() {
         return backupInfos;
     }

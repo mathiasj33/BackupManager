@@ -36,6 +36,8 @@ public class FXMLDocumentController implements Initializable {
     private TextField storageField;
     @FXML
     private Button editButton;
+    @FXML
+    private Button removeButton;
     
     private Backup backup;
     
@@ -52,6 +54,7 @@ public class FXMLDocumentController implements Initializable {
         
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             editButton.setDisable(newValue == null || !(newValue instanceof FolderBackupInfo));
+            removeButton.setDisable(newValue == null);
         });
         
         backup.addBackupInfo(new FolderBackupInfo("C:\\Users\\Mathias"));
@@ -107,5 +110,10 @@ public class FXMLDocumentController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.show();
+    }
+    
+    @FXML
+    public void remove(ActionEvent event) {
+        backup.removeBackupInfo(listView.getSelectionModel().getSelectedItem());
     }
 }

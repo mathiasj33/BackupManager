@@ -19,7 +19,7 @@
             <Font name="Segoe UI" size="15.0" />
          </font>
       </Label>
-      <TextArea layoutX="16.0" layoutY="95.0" prefHeight="83.0" prefWidth="268.0" promptText=".class, .git" />
+      <TextArea fx:id="fileTypesTextArea" layoutX="16.0" layoutY="95.0" prefHeight="83.0" prefWidth="268.0" promptText=".class, .git" />
       <CheckBox fx:id="checkBox" layoutX="16.0" layoutY="201.0" mnemonicParsing="false" text="Include sub-directories">
          <font>
             <Font name="Segoe UI" size="15.0" />
@@ -30,7 +30,7 @@
             <Font name="Segoe UI" size="15.0" />
          </font>
       </Label>
-      <TextArea layoutX="16.0" layoutY="262.0" prefHeight="83.0" prefWidth="268.0" promptText="Subfolder1, Subfolder2" />
+      <TextArea fx:id="excludeFoldersTextArea" layoutX="16.0" layoutY="262.0" prefHeight="83.0" prefWidth="268.0" promptText="Subfolder1, Subfolder2" />
       <Button fx:id="okButton" layoutX="214.0" layoutY="366.0" mnemonicParsing="false" onAction="#close" prefHeight="31.0" prefWidth="70.0" text="OK" />
    </children>
 </AnchorPane>

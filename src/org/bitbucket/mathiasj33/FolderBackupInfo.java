@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
 
 public class FolderBackupInfo extends BackupInfo {
 
@@ -19,11 +18,19 @@ public class FolderBackupInfo extends BackupInfo {
     }
 
     public void setFilesToExclude(String... fileEndings) {
-        filesToExclude.addAll(Arrays.asList(fileEndings));
+        filesToExclude = Arrays.asList(fileEndings);
     }
     
     public void setFoldersToExclude(String... folderNames) {
-        foldersToExclude.addAll(Arrays.asList(folderNames));
+        foldersToExclude = Arrays.asList(folderNames);
+    }
+
+    public List<String> getFilesToExclude() {
+        return filesToExclude;
+    }
+
+    public List<String> getFoldersToExclude() {
+        return foldersToExclude;
     }
     
     public BooleanProperty includeSubDirectoriesProperty() {
