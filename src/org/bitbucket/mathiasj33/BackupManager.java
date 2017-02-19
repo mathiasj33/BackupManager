@@ -20,6 +20,7 @@ public class BackupManager extends Application {
         
         stage.setScene(scene);
         stage.setTitle("Backup Manager © Mathias Jackermeier");
+        stage.setResizable(false);
         stage.show();
     }
 
