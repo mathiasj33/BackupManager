@@ -26,8 +26,6 @@ public class FXMLPropertiesController implements Initializable {
     private CheckBox checkBox;
     @FXML
     private TextArea excludeFoldersTextArea;
-    @FXML
-    private Button okButton;
     
     public FXMLPropertiesController(FolderBackupInfo info, Stage stage) {
         this.info = info;

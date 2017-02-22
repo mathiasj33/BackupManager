@@ -596,7 +596,7 @@
  *                                                                             *
  ******************************************************************************/
 .text-field{
-    -fx-skin: "jfxtras.styles.jmetro8.MetroTextFieldSkin";
+    /*-fx-skin: "jfxtras.styles.jmetro8.MetroTextFieldSkin";*/
 }
 
 .text-input{
@@ -1039,7 +1039,7 @@
 }
 
 .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
-    -fx-background-color: white;
+    /*-fx-background-color: white;*/
 }
 
 .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:focused {
@@ -1047,7 +1047,7 @@
 }
 
 .list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell {
-    -fx-background-color: white;
+    /*-fx-background-color: white;*/
 }
 
 .list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:focused {

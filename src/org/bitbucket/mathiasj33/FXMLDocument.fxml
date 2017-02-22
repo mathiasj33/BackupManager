@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bitbucket.mathiasj33.FXMLDocumentController">
    <children>
@@ -47,4 +48,7 @@
          </font>
       </Button>
    </children>
+   <stylesheets>
+       <URL value="@JMetroLightTheme.css"/>
+   </stylesheets>
 </AnchorPane>
