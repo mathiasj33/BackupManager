@@ -1,5 +1,7 @@
 package org.bitbucket.mathiasj33;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -110,6 +112,14 @@ public class FXMLDocumentController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.show();
+        
+        GsonBuilder gson = new GsonBuilder();
+        gson.registerTypeAdapter(FolderBackupInfo.class, new FolderBackupInfoSerializer());
+        gson.registerTypeAdapter(FileBackupInfo.class, new FileBackupInfoSerializer());
+        gson.registerTypeAdapter(Backup.class, new BackupSerializer());
+        System.out.println(gson.create().toJson(backup));
+//        Backup newBackup = gson.fromJson(gson.toJson(backup), Backup.class);
+//        System.out.println(newBackup.getBackupInfos());
     }
     
     @FXML
