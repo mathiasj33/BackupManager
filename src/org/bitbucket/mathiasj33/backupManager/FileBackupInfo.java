@@ -1,5 +1,5 @@
 
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager;
 
 public class FileBackupInfo extends BackupInfo {
 

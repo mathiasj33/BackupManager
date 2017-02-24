@@ -1,4 +1,4 @@
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

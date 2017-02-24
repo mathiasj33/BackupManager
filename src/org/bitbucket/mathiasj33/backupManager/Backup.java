@@ -1,5 +1,5 @@
 
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

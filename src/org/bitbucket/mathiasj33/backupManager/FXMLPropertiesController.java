@@ -1,8 +1,8 @@
 
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager;
 
-import com.google.gson.Gson;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -17,6 +17,7 @@ public class FXMLPropertiesController implements Initializable {
 
     private FolderBackupInfo info;
     private Stage stage;
+    private List<PropertiesAppliedListener> listeners = new ArrayList<>();
     
     @FXML
     private Label header;
@@ -45,6 +46,10 @@ public class FXMLPropertiesController implements Initializable {
         Platform.runLater(header::requestFocus);
     }
 
+    public void addPropertiesAppliedListener(PropertiesAppliedListener listener) {
+        listeners.add(listener);
+    }
+    
     @FXML
     private void close() {
         apply();
@@ -56,6 +61,7 @@ public class FXMLPropertiesController implements Initializable {
         info.setFilesToExclude(fileTypes);
         String[] folders = getFoldersToExclude();
         info.setFoldersToExclude(folders);
+        listeners.forEach(l -> l.propertiesApplied());
     }
     
     private String[] getFileTypes() {

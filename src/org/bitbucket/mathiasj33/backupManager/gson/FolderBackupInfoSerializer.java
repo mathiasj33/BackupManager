@@ -1,4 +1,4 @@
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager.gson;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
+import org.bitbucket.mathiasj33.backupManager.FolderBackupInfo;
 
 public class FolderBackupInfoSerializer implements JsonSerializer<FolderBackupInfo>{
 

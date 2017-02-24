@@ -1,5 +1,5 @@
 
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager;
 
 public abstract class BackupInfo {
     private String path;

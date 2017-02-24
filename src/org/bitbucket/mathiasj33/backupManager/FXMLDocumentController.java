@@ -1,7 +1,5 @@
-package org.bitbucket.mathiasj33;
+package org.bitbucket.mathiasj33.backupManager;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +26,7 @@ import javafx.stage.Stage;
  *
  * @author Mathias
  */
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentController implements Initializable, PropertiesAppliedListener {
     
     @FXML
     private AnchorPane anchorPane;
@@ -41,10 +39,16 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button removeButton;
     
+    private Storage storage;
     private Backup backup;
     
     public FXMLDocumentController() {
-        backup = new Backup();
+        storage = new JsonStorage();
+        try {
+            backup = storage.retrieve();
+        } catch(StoreException e) {
+            backup = new Backup();
+        }
     }
     
     @Override
@@ -59,7 +63,7 @@ public class FXMLDocumentController implements Initializable {
             removeButton.setDisable(newValue == null);
         });
         
-        backup.addBackupInfo(new FolderBackupInfo("C:\\Users\\Mathias"));
+        
         
         Platform.runLater(anchorPane::requestFocus);
     } 
@@ -69,6 +73,7 @@ public class FXMLDocumentController implements Initializable {
         File file = getFile("Choose a file");
         if(file == null) return;
         backup.addBackupInfo(new FileBackupInfo(file.getAbsolutePath()));
+        storage.tryStore(backup);
     }
     
     @FXML
@@ -76,6 +81,7 @@ public class FXMLDocumentController implements Initializable {
         File file = getDirectory("Choose a folder");
         if(file == null) return;
         backup.addBackupInfo(new FolderBackupInfo(file.getAbsolutePath()));
+        storage.tryStore(backup);
     }
     
     @FXML
@@ -83,6 +89,7 @@ public class FXMLDocumentController implements Initializable {
         File dir = getDirectory("Choose a storage folder");
         if(dir == null) return;
         backup.setStorageDirectory(dir.getAbsolutePath());
+        storage.tryStore(backup);
     }
     
     public File getFile(String title) {
@@ -103,7 +110,9 @@ public class FXMLDocumentController implements Initializable {
         
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLProperties.fxml"));
-        loader.setController(new FXMLPropertiesController(info, stage));
+        FXMLPropertiesController propertiesConroller = new FXMLPropertiesController(info, stage);
+        propertiesConroller.addPropertiesAppliedListener(this);
+        loader.setController(propertiesConroller);
         Parent root = loader.load();
         
         Scene scene = new Scene(root);
@@ -112,18 +121,16 @@ public class FXMLDocumentController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.show();
-        
-        GsonBuilder gson = new GsonBuilder();
-        gson.registerTypeAdapter(FolderBackupInfo.class, new FolderBackupInfoSerializer());
-        gson.registerTypeAdapter(FileBackupInfo.class, new FileBackupInfoSerializer());
-        gson.registerTypeAdapter(Backup.class, new BackupSerializer());
-        System.out.println(gson.create().toJson(backup));
-//        Backup newBackup = gson.fromJson(gson.toJson(backup), Backup.class);
-//        System.out.println(newBackup.getBackupInfos());
+    }
+    
+    @Override
+    public void propertiesApplied() {
+        storage.tryStore(backup);
     }
     
     @FXML
     public void remove(ActionEvent event) {
         backup.removeBackupInfo(listView.getSelectionModel().getSelectedItem());
+        storage.tryStore(backup);
     }
 }
