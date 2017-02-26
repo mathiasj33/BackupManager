@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="header" layoutX="16.0" layoutY="14.0" text="Properties of file">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="216.0" layoutY="142.0" mnemonicParsing="false" onAction="#close" prefHeight="31.0" prefWidth="70.0" text="OK" />
+      <Label layoutX="17.0" layoutY="77.0" text="In which subfolder should it be saved?">
+         <font>
+            <Font name="Segoe UI" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="targetSubFolderField" layoutX="25.0" layoutY="104.0" prefHeight="25.0" prefWidth="261.0" promptText="Subfolder\In\Target\Directory" />
+      <Label layoutX="15.0" layoutY="104.0" text="\\">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+   <stylesheets>
+       <URL value="@JMetroLightTheme.css" />
+   </stylesheets>
+</AnchorPane>

@@ -1,6 +1,7 @@
 
 package org.bitbucket.mathiasj33.backupManager;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,5 +49,18 @@ public class FolderBackupInfo extends BackupInfo {
 
     public void setIncludeSubDirectories(boolean includeSubDirectories) {
         this.includeSubDirectories.setValue(includeSubDirectories);
+    }
+
+    @Override
+    public String createCommand(String target) {
+        String firstParent = "";
+        File parent = new File(getPath());
+        while(parent.getParent() != null) {
+            parent = new File(parent.getParent());
+            firstParent = parent.getAbsolutePath();
+        }
+        String pathWithoutBeginning = getPath().replace(firstParent, "");  //TODO: if includeSubDirectories, angeben können, wie die ordnerstruktur im backup aussehen soll, vor dem Backup noch sanity checks
+        String cmd = "robocopy \"" + getPath() + "\" \"" + removeTrailingBackspace(target) + "\\" + pathWithoutBeginning + "\" /mir ";
+        return cmd;
     }
 }

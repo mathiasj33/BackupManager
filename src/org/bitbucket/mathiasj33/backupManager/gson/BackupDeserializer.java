@@ -19,8 +19,7 @@ public class BackupDeserializer implements JsonDeserializer<Backup> {
         JsonArray infos = object.get("backupInfos").getAsJsonArray();
         infos.forEach(e -> backup.addBackupInfo(jdc.deserialize(e, BackupInfo.class)));
 
-        if (object.get("storageDirectory") != null)
-            backup.setStorageDirectory(object.get("storageDirectory").getAsString());
+        backup.setStorageDirectory(object.get("storageDirectory").getAsString());
         return backup;
     }
 

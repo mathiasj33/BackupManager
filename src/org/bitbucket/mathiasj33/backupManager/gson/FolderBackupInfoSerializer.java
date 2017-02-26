@@ -22,6 +22,7 @@ public class FolderBackupInfoSerializer implements JsonSerializer<FolderBackupIn
         object.add("filesToExclude", filesToExclude);
         object.add("foldersToExclude", foldersToExclude);
         object.addProperty("includeSubDirectories", t.includeSubDirectoriesProperty().get());
+        object.addProperty("relativeFolder", t.getRelativeFolder().get());
         return object;
     }
 

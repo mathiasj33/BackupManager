@@ -1,6 +1,7 @@
 
 package org.bitbucket.mathiasj33.backupManager;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +9,16 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class FXMLPropertiesController implements Initializable {
+public class FXMLFolderPropertiesController implements Initializable {
 
+    private Backup backup;
     private FolderBackupInfo info;
     private Stage stage;
     private List<PropertiesAppliedListener> listeners = new ArrayList<>();
@@ -27,20 +31,28 @@ public class FXMLPropertiesController implements Initializable {
     private CheckBox checkBox;
     @FXML
     private TextArea excludeFoldersTextArea;
+    @FXML
+    private Button addButton;
+    @FXML
+    private TextField targetSubFolderField;
     
-    public FXMLPropertiesController(FolderBackupInfo info, Stage stage) {
+    public FXMLFolderPropertiesController(Backup backup, FolderBackupInfo info, Stage stage) {
+        this.backup = backup;
         this.info = info;
         this.stage = stage;
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        header.setText(header.getText() + "\n" + info.getPath());
+        header.setText(header.getText() + "\n" + new File(info.getPath()).getName());
         checkBox.selectedProperty().bindBidirectional(info.includeSubDirectoriesProperty());
         excludeFoldersTextArea.disableProperty().bind(checkBox.selectedProperty().not());
+        addButton.disableProperty().bind(checkBox.selectedProperty().not());
         
         fileTypesTextArea.setText(toCommaSeparatedString(info.getFilesToExclude()));
         excludeFoldersTextArea.setText(toCommaSeparatedString(info.getFoldersToExclude()));        
+        
+        targetSubFolderField.textProperty().bindBidirectional(info.getRelativeFolder());
         
         stage.setOnCloseRequest(e -> apply());
         Platform.runLater(header::requestFocus);
@@ -48,6 +60,14 @@ public class FXMLPropertiesController implements Initializable {
 
     public void addPropertiesAppliedListener(PropertiesAppliedListener listener) {
         listeners.add(listener);
+    }
+    
+    @FXML
+    private void addSubFolder() {
+        File dir = JavaFXUtils.getDirectory("Choose a subfolder", new File(info.getPath()),stage);
+        if(dir == null || excludeFoldersTextArea.getText().contains(dir.getName())) return;
+        if(!excludeFoldersTextArea.getText().equals("")) excludeFoldersTextArea.appendText(", ");
+        excludeFoldersTextArea.appendText(dir.getName());
     }
     
     @FXML

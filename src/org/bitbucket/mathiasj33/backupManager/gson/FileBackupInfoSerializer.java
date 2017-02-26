@@ -14,6 +14,7 @@ public class FileBackupInfoSerializer implements JsonSerializer<FileBackupInfo> 
         JsonObject object = new JsonObject();
         object.addProperty("type", "file");
         object.addProperty("path", t.getPath());
+        object.addProperty("relativeFolder", t.getRelativeFolder().get());
         return object;
     }
 

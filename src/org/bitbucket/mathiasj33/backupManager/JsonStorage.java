@@ -19,7 +19,7 @@ import java.nio.file.Files;
 
 public class JsonStorage implements Storage {
 
-    private final static String FILE_NAME = System.getProperty("user.home") + "/BackupManager/properties.json";
+    private final static String FILE_NAME = System.getProperty("user.home") + "/.backupManager/properties.json";
     private final Gson gson;
     
     public JsonStorage() {

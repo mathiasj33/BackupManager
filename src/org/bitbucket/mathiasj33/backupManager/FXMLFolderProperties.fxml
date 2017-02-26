@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="552.0" prefWidth="300.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label fx:id="header" text="Properties of directory">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Exclude file types:">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="fileTypesTextArea" prefHeight="83.0" prefWidth="268.0" promptText=".class, .git" wrapText="true">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <CheckBox fx:id="checkBox" mnemonicParsing="false" text="Include sub-directories">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </CheckBox>
+            <Label text="Exclude folders:">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="excludeFoldersTextArea" prefHeight="83.0" prefWidth="268.0" promptText="Subfolder1, Subfolder2" wrapText="true">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#addSubFolder" prefHeight="33.0" prefWidth="77.0" text="Add" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Label text="In which subfolder should it be saved?">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="24.0" prefWidth="260.0">
+               <children>
+                  <Label text="\\">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="targetSubFolderField" prefHeight="25.0" prefWidth="263.0" promptText="Subfolder\In\Target\Directory">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#close" prefHeight="31.0" prefWidth="70.0" text="OK">
+               <VBox.margin>
+                  <Insets left="190.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+       <URL value="@JMetroLightTheme.css" />
+   </stylesheets>
+</AnchorPane>
