@@ -1,4 +1,3 @@
-
 package org.bitbucket.mathiasj33.backupManager;
 
 import java.io.IOException;
@@ -10,16 +9,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class Backup {
+
     private ObservableList<BackupInfo> backupInfos;
     private StringProperty storageDirectory;
-    
+
     public Backup() {
         backupInfos = FXCollections.observableArrayList();
         storageDirectory = new SimpleStringProperty("");
     }
-    
+
     public void backup() {
         try {
             executeCommands(createCommands());
@@ -27,7 +31,7 @@ public class Backup {
             Logger.getLogger(Backup.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private List<String> createCommands() {
         List<String> commands = new ArrayList<>();
         backupInfos.forEach(info -> {
@@ -35,22 +39,35 @@ public class Backup {
         });
         return commands;
     }
-    
+
     private void executeCommands(List<String> commands) throws IOException {
-        for(String cmd : commands) {
+        for (String cmd : commands) {
             System.out.println("Executing: " + cmd);
-            //Runtime.getRuntime().exec(cmd);
+            Process p = Runtime.getRuntime().exec(cmd);
+            
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLoading.fxml"));
+            FXMLLoadingController controller = new FXMLLoadingController(p.getInputStream());
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Loading");
+            stage.setResizable(false);
+            stage.show();
+            
+            
         }
     }
-    
+
     public void addBackupInfo(BackupInfo info) {
         backupInfos.add(info);
     }
-    
+
     public void removeBackupInfo(BackupInfo info) {
         backupInfos.remove(info);
     }
-    
+
     public ObservableList<BackupInfo> getBackupInfos() {
         return backupInfos;
     }

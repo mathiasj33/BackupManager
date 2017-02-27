@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="322.0" text="Backing up your files">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
+            <ProgressBar prefWidth="200.0" progress="0.23">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></ProgressBar>
+            <TextArea fx:id="console" prefHeight="299.0" prefWidth="600.0">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font>
+            </TextArea>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+       <URL value="@JMetroLightTheme.css" />
+   </stylesheets>
+</AnchorPane>

@@ -1,4 +1,3 @@
-
 package org.bitbucket.mathiasj33.backupManager;
 
 import java.io.File;
@@ -14,6 +13,9 @@ public class FileBackupInfo extends BackupInfo {
         File file = new File(getPath());
         String targetCleaned = removeTrailingBackspace(target);
         String fileName = file.getName();
-        return "robocopy \"" + file.getParent() + "\" \"" + targetCleaned + "\" \"" + fileName + "\"";  //robocopy "Path\To\Parent" "Path\To\Target" "fileName.ending"
-     }
+        String relativeFolderCleaned = removeTrailingBackspace(getRelativeFolder().get());
+        if (!relativeFolderCleaned.equals(""))
+            relativeFolderCleaned = "\\" + relativeFolderCleaned;
+        return "robocopy \"" + file.getParent() + "\" \"" + targetCleaned + relativeFolderCleaned + "\" \"" + fileName + "\"";  //robocopy "Path\To\Parent" "Path\To\Target" "fileName.ending"
+    }
 }

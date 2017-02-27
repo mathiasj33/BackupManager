@@ -2,6 +2,8 @@ package org.bitbucket.mathiasj33.backupManager;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -19,6 +21,8 @@ public class FXMLFilePropertiesController implements Initializable {
     private Backup backup;
     private FileBackupInfo info;
     private Stage stage;
+    
+    private List<PropertiesAppliedListener> listeners = new ArrayList<>();
 
     public FXMLFilePropertiesController(Backup backup, FileBackupInfo info, Stage stage) {
         this.backup = backup;
@@ -30,11 +34,22 @@ public class FXMLFilePropertiesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         header.setText(header.getText() + "\n" + new File(info.getPath()).getName());
         targetSubFolderField.textProperty().bindBidirectional(info.getRelativeFolder());
+        
+        stage.setOnCloseRequest(e -> apply());
         Platform.runLater(header::requestFocus);
     }
 
+    public void addPropertiesAppliedListener(PropertiesAppliedListener listener) {
+        listeners.add(listener);
+    }
+    
     @FXML
     private void close() {
+        apply();
         stage.close();
+    }
+    
+    private void apply() {
+        listeners.forEach(l -> l.propertiesApplied());
     }
 }

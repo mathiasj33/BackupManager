@@ -99,6 +99,7 @@ public class FXMLDocumentController implements Initializable, PropertiesAppliedL
         if (info instanceof FileBackupInfo) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLFileProperties.fxml"));
             FXMLFilePropertiesController propertiesConroller = new FXMLFilePropertiesController(backup, (FileBackupInfo) info, stage);
+            propertiesConroller.addPropertiesAppliedListener(this);
             loader.setController(propertiesConroller);
             root = loader.load();
         } else {

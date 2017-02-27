@@ -59,7 +59,7 @@ public class FolderBackupInfo extends BackupInfo {
             parent = new File(parent.getParent());
             firstParent = parent.getAbsolutePath();
         }
-        String pathWithoutBeginning = getPath().replace(firstParent, "");  //TODO: if includeSubDirectories, angeben können, wie die ordnerstruktur im backup aussehen soll, vor dem Backup noch sanity checks
+        String pathWithoutBeginning = getPath().replace(firstParent, "");  //TODO: if includeSubDirectories, vor dem Backup noch sanity checks
         String cmd = "robocopy \"" + getPath() + "\" \"" + removeTrailingBackspace(target) + "\\" + pathWithoutBeginning + "\" /mir ";
         return cmd;
     }
