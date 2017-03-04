@@ -21,11 +21,11 @@
                <font>
                   <Font size="17.0" />
                </font></Label>
-            <ProgressBar prefWidth="200.0" progress="0.23">
+            <ProgressBar fx:id="progressBar" prefWidth="200.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></ProgressBar>
-            <TextArea fx:id="console" prefHeight="299.0" prefWidth="600.0">
+            <TextArea fx:id="console" editable="false" prefHeight="299.0" prefWidth="600.0">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>

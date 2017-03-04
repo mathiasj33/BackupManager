@@ -9,6 +9,7 @@ public class JavaFXUtils {
 
     public static File getFile(String title, Window window) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setTitle(title);
         return fileChooser.showOpenDialog(window);
     }

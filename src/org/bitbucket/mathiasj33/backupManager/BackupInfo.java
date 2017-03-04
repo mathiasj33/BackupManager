@@ -28,6 +28,13 @@ public abstract class BackupInfo {
         return path.substring(0, path.length() - 1);
     }
 
+    protected String getRelativeFolderCleaned() {
+        String relativeFolderCleaned = removeTrailingBackspace(getRelativeFolder().get());
+        if (!relativeFolderCleaned.equals(""))
+            relativeFolderCleaned = "\\" + relativeFolderCleaned;
+        return relativeFolderCleaned;
+    }
+    
     public StringProperty getRelativeFolder() {
         return relativeFolder;
     }
