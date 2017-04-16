@@ -25,7 +25,7 @@ public class BackupInfoDeserializer implements JsonDeserializer<BackupInfo> {
 
     public FileBackupInfo createFileBackupInfo(JsonObject obj) {
         FileBackupInfo info = new FileBackupInfo(obj.get("path").getAsString());
-        info.setRelativeFolder(obj.get("relativeFolder").getAsString());
+        info.setTargetSubFolder(obj.get("relativeFolder").getAsString());
         return info;
     }
 
@@ -38,7 +38,7 @@ public class BackupInfoDeserializer implements JsonDeserializer<BackupInfo> {
         info.setFilesToExclude(filesToExclude);
         info.setFoldersToExclude(foldersToExclude);
         info.setIncludeSubDirectories(includeSubDirectories);
-        info.setRelativeFolder(obj.get("relativeFolder").getAsString());
+        info.setTargetSubFolder(obj.get("relativeFolder").getAsString());
         return info;
     }
 

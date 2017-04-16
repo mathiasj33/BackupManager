@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="147.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0">
+      <VBox alignment="TOP_CENTER" prefHeight="140.0" prefWidth="600.0">
          <children>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="322.0" text="Backing up your files">
                <VBox.margin>
@@ -21,18 +21,20 @@
                <font>
                   <Font size="17.0" />
                </font></Label>
-            <ProgressBar fx:id="progressBar" prefWidth="200.0">
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></ProgressBar>
-            <TextArea fx:id="console" editable="false" prefHeight="299.0" prefWidth="600.0">
+            <Label fx:id="progressLabel">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets left="180.0" top="5.0" />
                </VBox.margin>
-               <font>
-                  <Font name="Consolas" size="12.0" />
-               </font>
-            </TextArea>
+            </Label>
+            <Button fx:id="closeButton" disable="true" mnemonicParsing="false" onAction="#close" text="Close">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>

@@ -33,7 +33,7 @@ public class FXMLFilePropertiesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         header.setText(header.getText() + "\n" + new File(info.getPath()).getName());
-        targetSubFolderField.textProperty().bindBidirectional(info.getRelativeFolder());
+        targetSubFolderField.textProperty().bindBidirectional(info.getTargetSubFolder());
         
         stage.setOnCloseRequest(e -> apply());
         Platform.runLater(header::requestFocus);

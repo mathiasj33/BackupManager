@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -131,6 +133,36 @@ public class FXMLDocumentController implements Initializable, PropertiesAppliedL
 
     @FXML
     public void backup(ActionEvent event) {
-        backup.backup();
+        if (backup.getBackupInfos().isEmpty())
+            showError("You have not specified anything to backup.");
+        else if (backup.getStorageDirectory().get().equals(""))
+            showError("You have not specified a storage directory.");
+        else {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLoading.fxml"));
+            FXMLLoadingController controller = new FXMLLoadingController(stage);
+            loader.setController(controller);
+            try {
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Loading");
+                stage.setResizable(false);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch (IOException e) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, e);
+            }
+
+            new Thread(() -> backup.backup(controller)).start();
+        }
+    }
+
+    private void showError(String errorMsg) {
+        try {
+            new FXMLErrorController().showWindow(errorMsg);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

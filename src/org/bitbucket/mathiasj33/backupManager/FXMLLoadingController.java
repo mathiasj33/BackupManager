@@ -5,54 +5,65 @@
  */
 package org.bitbucket.mathiasj33.backupManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
  *
  * @author Mathias
  */
-public class FXMLLoadingController implements Initializable {
+public class FXMLLoadingController implements Initializable, Callback {
 
-    @FXML
-    private TextArea console;
     @FXML
     private ProgressBar progressBar;
-    
-    private BufferedReader reader;
+    @FXML
+    private Label progressLabel;
+    @FXML
+    private Button closeButton;
 
-    public FXMLLoadingController(InputStream inputStream) {
-        reader = new BufferedReader(new InputStreamReader(inputStream));
+    private Stage stage;
+    private boolean finished;
+
+    public FXMLLoadingController(Stage stage) {
+        this.stage = stage;
+        stage.setOnCloseRequest(e -> tryClose(e));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        final String copy = line;
-                        Platform.runLater(() -> console.appendText(copy + "\n"));
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLLoadingController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    }
+
+    private void tryClose(WindowEvent e) {
+        if (finished)
+            close();
+        else
+            e.consume();
+    }
+
+    @FXML
+    private void close() {
+        stage.close();
+    }
+
+    @Override
+    public void progressUpdated(int commandsExecuted, int totalCommands) {
+        Platform.runLater(() -> 
+        {
+            progressLabel.setText(commandsExecuted + "/" + totalCommands);
+            progressBar.setProgress(((float) commandsExecuted) / totalCommands);
+            if (commandsExecuted == totalCommands) {
+                finished = true;
+                closeButton.setDisable(false);
             }
-        };
-        new Thread(r).start();
+        });
     }
 }

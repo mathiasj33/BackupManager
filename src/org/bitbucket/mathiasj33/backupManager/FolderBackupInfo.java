@@ -16,6 +16,7 @@ public class FolderBackupInfo extends BackupInfo {
 
     public FolderBackupInfo(String path) {
         super(path);
+        this.targetSubFolder.set(new File(path).getName());
     }
 
     public void setFilesToExclude(String... fileEndings) {
@@ -49,10 +50,10 @@ public class FolderBackupInfo extends BackupInfo {
     public void setIncludeSubDirectories(boolean includeSubDirectories) {
         this.includeSubDirectories.setValue(includeSubDirectories);
     }
-
+    
     @Override
-    public String createCommand(String target) {  //TODO: vor dem Backup noch sanity checks; UI gescheit machen (Window darf nicht geclosed werden, nicht in Backup.java)
-        String command = "robocopy \"" + getPath() + "\" \"" + removeTrailingBackspace(target) + getRelativeFolderCleaned() + "\" /mir";
+    public String createCommand(String target) {
+        String command = "robocopy \"" + getPath() + "\" \"" + removeTrailingBackspace(target) + getTargetSubFolderCleaned() + "\" /mir";
         if (!includeSubDirectories.get()) {
             File folder = new File(getPath());
             String[] subDirs = folder.list((File current, String name) -> new File(current, name).isDirectory());

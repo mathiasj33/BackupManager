@@ -1,16 +1,17 @@
 
 package org.bitbucket.mathiasj33.backupManager;
 
+import java.io.File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public abstract class BackupInfo {
     private String path;
-    private StringProperty relativeFolder;
+    protected StringProperty targetSubFolder;
 
     public BackupInfo(String path) {
         this.path = path;
-        relativeFolder = new SimpleStringProperty("");
+        targetSubFolder = new SimpleStringProperty("");
     }
 
     public String getPath() {
@@ -28,19 +29,19 @@ public abstract class BackupInfo {
         return path.substring(0, path.length() - 1);
     }
 
-    protected String getRelativeFolderCleaned() {
-        String relativeFolderCleaned = removeTrailingBackspace(getRelativeFolder().get());
-        if (!relativeFolderCleaned.equals(""))
-            relativeFolderCleaned = "\\" + relativeFolderCleaned;
-        return relativeFolderCleaned;
+    protected String getTargetSubFolderCleaned() {
+        String targetSubFolderCleaned = removeTrailingBackspace(getTargetSubFolder().get());
+        if (!targetSubFolderCleaned.equals(""))
+            targetSubFolderCleaned = "\\" + targetSubFolderCleaned;
+        return targetSubFolderCleaned;
     }
     
-    public StringProperty getRelativeFolder() {
-        return relativeFolder;
+    public StringProperty getTargetSubFolder() {
+        return targetSubFolder;
     }
 
-    public void setRelativeFolder(String relativeFolder) {
-        this.relativeFolder.set(relativeFolder);
+    public void setTargetSubFolder(String targetSubFolder) {
+        this.targetSubFolder.set(targetSubFolder);
     }
     
     @Override

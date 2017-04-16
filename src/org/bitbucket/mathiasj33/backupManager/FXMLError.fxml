@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<AnchorPane id="AnchorPane" prefHeight="143.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="22.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@error.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="errorLabel" layoutX="104.0" layoutY="37.0" prefHeight="53.0" prefWidth="279.0" text="Error" />
+      <Button layoutX="273.0" layoutY="96.0" mnemonicParsing="false" onAction="#close" prefHeight="31.0" prefWidth="102.0" text="Dismiss" />
+   </children>
+   <stylesheets>
+       <URL value="@JMetroLightTheme.css" />
+   </stylesheets>
+</AnchorPane>

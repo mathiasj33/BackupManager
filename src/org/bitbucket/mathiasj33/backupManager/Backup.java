@@ -9,26 +9,31 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class Backup {
 
     private ObservableList<BackupInfo> backupInfos;
     private StringProperty storageDirectory;
+    private CommandExecutor cmdExecutor;
 
     public Backup() {
         backupInfos = FXCollections.observableArrayList();
         storageDirectory = new SimpleStringProperty("");
+        cmdExecutor = new CommandExecutor();
     }
 
     public void backup() {
+        backup(getEmptyCallback());
+    }
+    
+    private Callback getEmptyCallback() {
+        return (a,b) -> {};
+    }
+    
+    public void backup(Callback callback) {
         try {
-            executeCommands(createCommands());
-        } catch (IOException ex) {
+            cmdExecutor.executeCommands(createCommands(), callback);
+        } catch (InterruptedException | IOException ex) {
             Logger.getLogger(Backup.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -39,25 +44,6 @@ public class Backup {
             commands.add(info.createCommand(storageDirectory.get()));
         });
         return commands;
-    }
-
-    private void executeCommands(List<String> commands) throws IOException {
-        for (String cmd : commands) {
-            System.out.println("Executing: " + cmd);
-            Process p = Runtime.getRuntime().exec(cmd);
-            
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLLoading.fxml"));
-            FXMLLoadingController controller = new FXMLLoadingController(p.getInputStream());
-            loader.setController(controller);
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Loading");
-            stage.setResizable(false);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        }
     }
 
     public void addBackupInfo(BackupInfo info) {

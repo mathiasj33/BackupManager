@@ -52,7 +52,7 @@ public class FXMLFolderPropertiesController implements Initializable {
         fileTypesTextArea.setText(toCommaSeparatedString(info.getFilesToExclude()));
         excludeFoldersTextArea.setText(toCommaSeparatedString(info.getFoldersToExclude()));        
         
-        targetSubFolderField.textProperty().bindBidirectional(info.getRelativeFolder());
+        targetSubFolderField.textProperty().bindBidirectional(info.getTargetSubFolder());
         
         stage.setOnCloseRequest(e -> apply());
         Platform.runLater(header::requestFocus);
